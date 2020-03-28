@@ -2,14 +2,9 @@ FROM alpine:latest
 MAINTAINER LasLabs Inc <support@laslabs.com>
 
 # Install
-RUN apk add --no-cache samba-dc supervisor \
+RUN apk add --no-cache samba-dc supervisor attr acl \
     # Remove default config data, if any
-    && rm -rf /etc/samba/smb.conf \
-    && rm -rf /var/lib/samba \
-    && rm -rf /var/log/samba \
-    && ln -s /samba/etc /etc/samba \
-    && ln -s /samba/lib /var/lib/samba \
-    && ln -s /samba/log /var/log/samba
+    && rm -rf /etc/samba/smb.conf
 
 # Expose ports
 EXPOSE 37/udp \
@@ -28,7 +23,7 @@ EXPOSE 37/udp \
        3269/tcp
 
 # Persist the configuration, data and log directories
-VOLUME ["/samba"]
+VOLUME ["/etc/samba", "/var/lib/samba", "/var/log/samba"]
 
 # Copy & set entrypoint for manual access
 COPY ./docker-entrypoint.sh /

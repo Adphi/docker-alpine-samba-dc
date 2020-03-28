@@ -12,8 +12,7 @@ if [ "${1:0:1}" = '-' ]; then
 fi
 
 # Configure the AD DC
-if [ ! -f /samba/etc/smb.conf ]; then
-    mkdir -p /samba/etc /samba/lib /samba/log
+if [ ! -f /etc/samba/smb.conf ]; then
     echo "${SAMBA_DC_DOMAIN} - Begin Domain Provisioning"
     samba-tool domain provision --domain="${SAMBA_DC_DOMAIN}" \
         --adminpass="${SAMBA_DC_ADMIN_PASSWD}" \

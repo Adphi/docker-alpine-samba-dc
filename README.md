@@ -1,8 +1,8 @@
 [![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 [![Build Status](https://travis-ci.org/LasLabs/docker-alpine-samba-dc.svg?branch=master)](https://travis-ci.org/LasLabs/docker-alpine-samba-dc)
 
-[![](https://images.microbadger.com/badges/image/laslabs/alpine-samba-dc.svg)](https://microbadger.com/images/laslabs/alpine-samba-dc "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/laslabs/alpine-samba-dc.svg)](https://microbadger.com/images/laslabs/alpine-samba-dc "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/adphi/alpine-samba-dc.svg)](https://microbadger.com/images/adphi/alpine-samba-dc "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/adphi/alpine-samba-dc.svg)](https://microbadger.com/images/adphi/alpine-samba-dc "Get your own version badge on microbadger.com")
 
 Docker - Alpine Samba Domain Controller
 =======================================
@@ -14,7 +14,7 @@ Configuration
 First, Pull the image:
 
 ```bash
-docker pull laslabs/alpine-samba-dc:0.1.0
+docker pull adphi/alpine-samba-dc:0.1.0
 ```
 
 Now, start the image with the correct environment variables for initial
@@ -27,12 +27,15 @@ configuration:
 mkdir ${PWD}/samba
 
 docker run -d --restart unless-stopped \
+    --cap-add SYS_ADMIN \
     -e SAMBA_DC_REALM='corp.example.net' \
     -e SAMBA_DC_DOMAIN='EXAMPLE' \
     -e SAMBA_DC_ADMIN_PASSWD='5u3r53cur3!' \
     -e SAMBA_DC_DNS_BACKEND='SAMBA_INTERNAL' \
-    -v ${PWD}/samba:/samba \
-     'laslabs/alpine-samba-dc:0.1.0'
+    -v $(pwd)/samba/etc:/etc/samba \
+    -v $(pwd)/samba/lib:/var/lib/samba \
+    -v $(pwd)/samba/log:/var/log/samba \
+     'adphi/alpine-samba-dc:0.1.0'
 ```
 
 Usage
@@ -40,7 +43,7 @@ Usage
 After the container has been run for the first time, invoke it with the following command
 
 ```bash
-docker run -d --restart unless-stopped -v ${PWD}/samba:/samba 'laslabs/alpine-samba-dc:0.1.0'
+docker run -d --restart unless-stopped -v ${PWD}/samba:/samba 'adphi/alpine-samba-dc:0.1.0'
 ```
 
 Volumes
@@ -79,14 +82,14 @@ Credits
 Contributors
 ------------
 
-* Ted Salmon <tsalmon@laslabs.com>
-* Dave Lasley <dave@laslabs.com>
+* Ted Salmon <tsalmon@adphi.com>
+* Dave Lasley <dave@adphi.com>
 
 Maintainer
 ----------
 
-[![LasLabs Inc.](https://laslabs.com/logo.png)](https://laslabs.com)
+[![LasLabs Inc.](https://adphi.com/logo.png)](https://adphi.com)
 
-This module is maintained by [LasLabs Inc.](https://laslabs.com)
+This module is maintained by [LasLabs Inc.](https://adphi.com)
 
 * https://github.com/LasLabs/docker-alpine-samba-dc
