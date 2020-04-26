@@ -33,7 +33,6 @@ docker run -d --name samba-ad \
     --cap-add SYS_ADMIN \
     --hostname dc01 \
     --dns 127.0.0.1 \
-    --dns 8.8.8.8 \
     --dns-search=corp.example.net \
     -e SAMBA_DC_REALM='corp.example.net' \
     -e SAMBA_DC_DOMAIN='EXAMPLE' \
@@ -71,7 +70,6 @@ docker run -d --name samba-ad \
     --cap-add SYS_ADMIN \
     --hostname dc01 \
     --dns 127.0.0.1 \
-    --dns 8.8.8.8 \
     -v $(pwd)/samba/etc:/etc/samba \
     -v $(pwd)/samba/lib:/var/lib/samba \
     -v $(pwd)/samba/log:/var/log/samba \
