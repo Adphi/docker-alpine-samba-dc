@@ -1,10 +1,10 @@
 FROM alpine:latest
-MAINTAINER LasLabs Inc <support@laslabs.com>
 
+RUN sed -i s/v3.11/edge/g /etc/apk/repositories
 # Install
-RUN apk add --no-cache samba-dc supervisor attr acl \
+RUN apk update && apk add --no-cache samba-dc chrony krb5 pam-winbind && \
     # Remove default config data, if any
-    && rm -rf /etc/samba/smb.conf
+    rm -rf /etc/samba/smb.conf
 
 # Expose ports
 EXPOSE 37/udp \
@@ -22,24 +22,27 @@ EXPOSE 37/udp \
        3268/tcp \
        3269/tcp
 
+ENV SAMBA_DC_DOMAIN=TEST \
+    SAMBA_DC_REALM=ad.test.org \
+    SAMBA_DC_ADMIN_PASSWORD='P4s$W0rd' \
+    SAMBA_DC_IP="" \
+    SAMBA_DC_DNS_FORWARDER=8.8.8.8 \
+    SAMBA_DC_NETBIOS_NAME="" \
+    ALLOW_DNS_UPDATES=secure \
+    DOMAIN_LOGONS=yes \
+    DOMAIN_MASTER=no \
+    LOG_LEVEL="3 passdb:5 auth:5" \
+    SERVER_STRING="Samba Domain Controller" \
+    TZ=UTC \
+    WINBIND_USE_DEFAULT_DOMAIN=yes \
+    BIND_INTERFACES_ONLY=yes \
+    INTERFACES="lo eth0"
+
 # Persist the configuration, data and log directories
 VOLUME ["/etc/samba", "/var/lib/samba", "/var/log/samba"]
 
 # Copy & set entrypoint for manual access
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY conf /tmp/conf
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["samba"]
-
-# Metadata
-ARG BUILD_DATE
-ARG VCS_REF
-ARG VERSION
-LABEL org.label-schema.build-date=$BUILD_DATE \
-      org.label-schema.name="Samba DC - Alpine" \
-      org.label-schema.description="Provides a Docker image for Samba 4 DC on Alpine Linux." \
-      org.label-schema.url="https://laslabs.com/" \
-      org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/LasLabs/docker-alpine-samba-dc" \
-      org.label-schema.vendor="LasLabs Inc." \
-      org.label-schema.version=$VERSION \
-      org.label-schema.schema-version="1.0"
