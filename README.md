@@ -114,27 +114,3 @@ pleasure:
 | SAMBA_DC_ADMIN_PASSWD | 5u3r53cur3! | The AD DC `Administrator` user password
 | SAMBA_DC_DNS_BACKEND | SAMBA_INTERNAL | The DNS backend to use
 
-Bug Tracker
-===========
-
-Bugs are tracked on [GitHub Issues](https://github.com/LasLabs/docker-alpine-samba-dc/issues).
-In case of trouble, please check there to see if your issue has already been reported.
-If you spotted it first, help us smash it by providing detailed and welcomed feedback.
-
-Credits
-=======
-
-Contributors
-------------
-
-* Ted Salmon <tsalmon@adphi.com>
-* Dave Lasley <dave@adphi.com>
-
-Maintainer
-----------
-
-[![LasLabs Inc.](https://adphi.com/logo.png)](https://adphi.com)
-
-This module is maintained by [LasLabs Inc.](https://adphi.com)
-
-* https://github.com/LasLabs/docker-alpine-samba-dc
