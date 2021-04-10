@@ -1,6 +1,5 @@
 FROM alpine:latest
 
-RUN sed -i s/v3.11/edge/g /etc/apk/repositories
 # Install
 RUN apk update && apk add --no-cache samba-dc chrony krb5 pam-winbind && \
     # Remove default config data, if any

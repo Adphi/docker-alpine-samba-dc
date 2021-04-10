@@ -1,9 +1,3 @@
-[![License: Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
-[![Build Status](https://travis-ci.org/LasLabs/docker-alpine-samba-dc.svg?branch=master)](https://travis-ci.org/LasLabs/docker-alpine-samba-dc)
-
-[![](https://images.microbadger.com/badges/image/adphi/alpine-samba-dc.svg)](https://microbadger.com/images/adphi/alpine-samba-dc "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/version/adphi/alpine-samba-dc.svg)](https://microbadger.com/images/adphi/alpine-samba-dc "Get your own version badge on microbadger.com")
-
 Docker - Alpine Samba Domain Controller
 =======================================
 
@@ -14,7 +8,7 @@ Configuration
 First, Pull the image:
 
 ```bash
-docker pull adphi/alpine-samba-dc:0.1.0
+docker pull adphi/samba-ad
 ```
 
 Now, start the image with the correct environment variables for initial
@@ -57,7 +51,7 @@ docker run -d --name samba-ad \
     -p 192.168.1.8:636:636 \
     -p 192.168.1.8:1024-1044:1024-1044 \
     -p 192.168.1.8:3268-3269:3268-3269 \
-    'adphi/alpine-samba-dc'
+    'adphi/samba-ad'
 ```
 
 Usage
@@ -88,7 +82,7 @@ docker run -d --name samba-ad \
 	-p 192.168.1.8:636:636 \
 	-p 192.168.1.8:1024-1044:1024-1044 \
 	-p 192.168.1.8:3268-3269:3268-3269 \
-     'adphi/alpine-samba-dc'
+     'adphi/samba-ad'
 ```
 
 Volumes
