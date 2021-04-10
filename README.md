@@ -33,9 +33,9 @@ docker run -d --name samba-ad \
     -e SAMBA_DC_ADMIN_PASSWORD='5u3r53cur3!' \
     -e SAMBA_DC_IP=192.168.1.8 \
     -e SAMBA_DC_DNS_FORWARDER=8.8.8.8 \
-    -v $(pwd)/data/etc:/etc/samba \
-    -v $(pwd)/data/lib:/var/lib/samba \
-    -v $(pwd)/data/log:/var/log/samba \
+    -v $(pwd)/samba/etc:/etc/samba \
+    -v $(pwd)/samba/lib:/var/lib/samba \
+    -v $(pwd)/samba/log:/var/log/samba \
     -p 192.168.1.8:53:53 \
     -p 192.168.1.8:53:53/udp \
     -p 192.168.1.8:88:88 \
@@ -93,7 +93,9 @@ The following volumes are exposed:
 
 | Name | Value | Description |
 |------|-------|-------------|
-| Samba | /samba | Re-homed Samba Config, data and log directory |
+| Samba Configuration| //etc/samba | Samba Config directory |
+| Samba Data| /var/lib/samba |Samba data directory |
+| Samba Logs| /var/log/samba |Samba log directory |
 
 Environment Variables
 =====================
@@ -106,5 +108,4 @@ pleasure:
 | SAMBA_DC_REALM | corp.example.net | The realm to launch the DC into
 | SAMBA_DC_DOMAIN | EXAMPLE | The NetBIOS Domain Name
 | SAMBA_DC_ADMIN_PASSWD | 5u3r53cur3! | The AD DC `Administrator` user password
-| SAMBA_DC_DNS_BACKEND | SAMBA_INTERNAL | The DNS backend to use
 

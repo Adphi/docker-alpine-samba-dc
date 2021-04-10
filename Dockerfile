@@ -21,9 +21,9 @@ EXPOSE 37/udp \
        3268/tcp \
        3269/tcp
 
-ENV SAMBA_DC_DOMAIN=TEST \
-    SAMBA_DC_REALM=ad.test.org \
-    SAMBA_DC_ADMIN_PASSWORD='P4s$W0rd' \
+ENV SAMBA_DC_DOMAIN=EXAMPLE \
+    SAMBA_DC_REALM=corp.example.net \
+    SAMBA_DC_ADMIN_PASSWORD='5u3r53cur3!' \
     SAMBA_DC_IP="" \
     SAMBA_DC_DNS_FORWARDER=8.8.8.8 \
     SAMBA_DC_NETBIOS_NAME="" \
